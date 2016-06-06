@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package pl.sylwekczmil.timetableserver.controller;
 
 import java.io.Serializable;
@@ -20,10 +16,7 @@ import pl.sylwekczmil.timetableserver.User;
 import pl.sylwekczmil.timetableserver.controller.exceptions.NonexistentEntityException;
 import pl.sylwekczmil.timetableserver.controller.exceptions.RollbackFailureException;
 
-/**
- *
- * @author bzyk4
- */
+
 public class UserJpaController implements Serializable {
 
     public UserJpaController(UserTransaction utx, EntityManagerFactory emf) {

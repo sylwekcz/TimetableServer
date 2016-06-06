@@ -22,10 +22,7 @@ import pl.sylwekczmil.timetableserver.controller.exceptions.IllegalOrphanExcepti
 import pl.sylwekczmil.timetableserver.controller.exceptions.NonexistentEntityException;
 import pl.sylwekczmil.timetableserver.controller.exceptions.RollbackFailureException;
 
-/**
- *
- * @author bzyk4
- */
+
 public class TimetableJpaController implements Serializable {
 
     public TimetableJpaController(UserTransaction utx, EntityManagerFactory emf) {
