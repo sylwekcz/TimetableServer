@@ -97,7 +97,7 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    @XmlTransient
     public String getToken() {
         return token;
     }
@@ -105,7 +105,7 @@ public class User implements Serializable {
     public void setToken(String token) {
         this.token = token;
     }
-
+    @XmlTransient
     public Date getTokenExpirationDate() {
         return tokenExpirationDate;
     }
