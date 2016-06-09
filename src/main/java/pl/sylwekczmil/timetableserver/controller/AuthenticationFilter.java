@@ -20,13 +20,13 @@ import javax.ws.rs.ext.Provider;
 import pl.sylwekczmil.timetableserver.Secured;
 import pl.sylwekczmil.timetableserver.User;
 
+
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
-    private String username;
-    
+    private String username;   
     
      private EntityManagerFactory getEntityManagerFactory() throws NamingException {
         return (EntityManagerFactory) new InitialContext().lookup("java:comp/env/persistence-factory");
@@ -54,7 +54,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         String token = authorizationHeader;
 
         try {
-        
             validateToken(token);
 
         } catch (Exception e) {
