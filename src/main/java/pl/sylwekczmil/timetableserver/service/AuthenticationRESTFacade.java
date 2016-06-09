@@ -55,8 +55,7 @@ public class AuthenticationRESTFacade {
         String password = credentials.getPassword();
         try {
 
-            authenticate(username, password);
-            String token = issueToken(username);
+            String token =  authenticate(username, password);
             return Response.ok(token).build();
 
         } catch (Exception e) {
@@ -65,29 +64,26 @@ public class AuthenticationRESTFacade {
     }
    
 
-    private void authenticate(String username, String password) throws Exception {
+    private String authenticate(String username, String password) throws Exception {
+        
         User u = getJpaController().findUserByUsername(username);
         if (!u.getPassword().equals(password)) {
             throw new Exception();
         }
-    }
-
-    private String issueToken(String username) throws Exception {
-        
-        
         
         Random random = new SecureRandom();
         String token = new BigInteger(130, random).toString(32);
-        User u = getJpaController().findUserByUsername(username);
-        token = username + ":" + token;
-        u.setToken(token);
+        token = username + ":" + token;    
         
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());  
-        c.add(Calendar.DATE, 1);                
-        u.setTokenExpirationDate(c.getTime());
+        c.add(Calendar.DATE, 1);   
         
+        u.setToken(token); 
+        u.setTokenExpirationDate(c.getTime());        
         getJpaController().edit(u);
-        return token;
+        return token;        
+        
     }
+
 }
