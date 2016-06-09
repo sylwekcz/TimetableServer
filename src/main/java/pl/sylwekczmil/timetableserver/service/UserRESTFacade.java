@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import pl.sylwekczmil.timetableserver.controller.UserJpaController;
 import pl.sylwekczmil.timetableserver.User;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,11 +18,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import pl.sylwekczmil.timetableserver.Secured;
 import pl.sylwekczmil.timetableserver.Timetable;
 
+@Secured
 @Path("user")
 public class UserRESTFacade {
 
@@ -81,7 +85,6 @@ public class UserRESTFacade {
         return getJpaController().findUser(id);
     }
 
-    @Secured
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<User> findAll() {
@@ -95,6 +98,7 @@ public class UserRESTFacade {
         return getJpaController().findUserEntities(max, first);
     }
 
+    
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -103,17 +107,19 @@ public class UserRESTFacade {
     }
 
     @GET
-    @Path("username")
+    @Path("current")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response findByUsername() {
+    public Response findCurrentUser(@Context SecurityContext securityContext) {
         try{
-            return Response.ok(getJpaController().findUserByUsername("sylwek")).build();
+            Principal principal = securityContext.getUserPrincipal();
+            String username = principal.getName();
+            return Response.ok(getJpaController().findUserByUsername(username)).build();
         } catch (Exception ex) {
             return Response.noContent().build();
         } 
     }
 
-    
+ 
     @GET
     @Path("{id}/timetable")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
