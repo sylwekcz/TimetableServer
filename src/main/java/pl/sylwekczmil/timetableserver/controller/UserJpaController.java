@@ -169,10 +169,21 @@ public class UserJpaController implements Serializable {
         }
     }
 
-    public User findUser(Integer id) {
+    public User findUser(Integer id){
         EntityManager em = getEntityManager();
         try {
             return em.find(User.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+     public User findUserByUsername(String username) throws NonexistentEntityException {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<User> q = em.createNamedQuery("User.findByUsername", User.class);
+             q.setParameter("username", username);           
+            return q.getSingleResult();
         } finally {
             em.close();
         }

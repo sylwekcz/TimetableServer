@@ -3,7 +3,12 @@ package pl.sylwekczmil.timetableserver.controller;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Date;
 import javax.annotation.Priority;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.UserTransaction;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -13,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 import pl.sylwekczmil.timetableserver.Secured;
+import pl.sylwekczmil.timetableserver.User;
 
 /*Inject a proxy of the SecurityContext in any REST endpoint class:
 
@@ -42,6 +48,20 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     private String username;
     
+    
+     private EntityManagerFactory getEntityManagerFactory() throws NamingException {
+        return (EntityManagerFactory) new InitialContext().lookup("java:comp/env/persistence-factory");
+    }
+
+    private UserJpaController getJpaController() {
+        try {
+            UserTransaction utx = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+            return new UserJpaController(utx, getEntityManagerFactory());
+        } catch (NamingException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
@@ -50,12 +70,12 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         // Check if the HTTP Authorization header is present and formatted correctly 
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer")) {
+        if (authorizationHeader == null) {
             throw new NotAuthorizedException("Authorization header must be provided");
         }
 
         // Extract the token from the HTTP Authorization header
-        String token = authorizationHeader.substring("Bearer".length()).trim();
+        String token = authorizationHeader;
 
         try {
 
@@ -100,13 +120,9 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
     private void validateToken(String token) throws Exception {
-        // Check if it was issued by the server and if it's not expired
-        // Throw an Exception if the token is invalid
-        
-        
-        // check token in database and return username
-        
-        username = "TODO";
-        
+        String[] s = token.split(":");      
+        username = s[0];
+        User u = getJpaController().findUserByUsername(username);       
+        if(!u.getToken().equals(token)&&!u.getTokenExpirationDate().before(new Date())) throw new Exception();               
     }
 }

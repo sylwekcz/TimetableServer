@@ -98,10 +98,22 @@ public class UserRESTFacade {
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
-    public String count() {
-        return String.valueOf(getJpaController().getUserCount());
+    public String count() {        
+       return String.valueOf(getJpaController().getUserCount());
     }
 
+    @GET
+    @Path("username")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Response findByUsername() {
+        try{
+            return Response.ok(getJpaController().findUserByUsername("sylwek")).build();
+        } catch (Exception ex) {
+            return Response.noContent().build();
+        } 
+    }
+
+    
     @GET
     @Path("{id}/timetable")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
