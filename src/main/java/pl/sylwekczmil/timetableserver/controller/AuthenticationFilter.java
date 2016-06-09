@@ -20,7 +20,6 @@ import javax.ws.rs.ext.Provider;
 import pl.sylwekczmil.timetableserver.Secured;
 import pl.sylwekczmil.timetableserver.User;
 
-
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
@@ -54,6 +53,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         String token = authorizationHeader;
 
         try {
+        
             validateToken(token);
 
         } catch (Exception e) {
