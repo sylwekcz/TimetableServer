@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import javax.naming.InitialContext;
 import pl.sylwekczmil.timetableserver.controller.TimetableJpaController;
-import pl.sylwekczmil.timetableserver.Timetable;
+import pl.sylwekczmil.timetableserver.model.Timetable;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -19,7 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.sylwekczmil.timetableserver.Event;
+import pl.sylwekczmil.timetableserver.model.Event;
 
 
 @Path("timetable")

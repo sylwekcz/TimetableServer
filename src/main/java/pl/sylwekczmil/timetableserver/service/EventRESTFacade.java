@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import javax.naming.InitialContext;
 import pl.sylwekczmil.timetableserver.controller.EventJpaController;
-import pl.sylwekczmil.timetableserver.Event;
+import pl.sylwekczmil.timetableserver.model.Event;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.Consumes;

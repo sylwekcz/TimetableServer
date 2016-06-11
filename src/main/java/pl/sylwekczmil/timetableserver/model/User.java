@@ -1,5 +1,5 @@
 
-package pl.sylwekczmil.timetableserver;
+package pl.sylwekczmil.timetableserver.model;
 
 import java.io.Serializable;
 import java.util.Collection;

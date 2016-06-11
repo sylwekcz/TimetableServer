@@ -7,8 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.UserTransaction;
-import pl.sylwekczmil.timetableserver.Event;
-import pl.sylwekczmil.timetableserver.Timetable;
+import pl.sylwekczmil.timetableserver.model.Event;
+import pl.sylwekczmil.timetableserver.model.Timetable;
 import pl.sylwekczmil.timetableserver.controller.exceptions.NonexistentEntityException;
 import pl.sylwekczmil.timetableserver.controller.exceptions.RollbackFailureException;
 

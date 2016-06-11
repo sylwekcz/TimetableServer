@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import javax.naming.InitialContext;
 import pl.sylwekczmil.timetableserver.controller.UserJpaController;
-import pl.sylwekczmil.timetableserver.User;
+import pl.sylwekczmil.timetableserver.model.User;
 import java.net.URI;
 import java.security.Principal;
 import java.util.List;
@@ -22,8 +22,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import pl.sylwekczmil.timetableserver.Secured;
-import pl.sylwekczmil.timetableserver.Timetable;
+import pl.sylwekczmil.timetableserver.model.Secured;
+import pl.sylwekczmil.timetableserver.model.Timetable;
 
 @Secured
 @Path("user")

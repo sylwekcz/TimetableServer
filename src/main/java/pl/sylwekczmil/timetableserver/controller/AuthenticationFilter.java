@@ -17,8 +17,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
-import pl.sylwekczmil.timetableserver.Secured;
-import pl.sylwekczmil.timetableserver.User;
+import pl.sylwekczmil.timetableserver.model.Secured;
+import pl.sylwekczmil.timetableserver.model.User;
 
 @Secured
 @Provider

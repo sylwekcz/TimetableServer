@@ -4,7 +4,7 @@ package pl.sylwekczmil.timetableserver.controller;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import pl.sylwekczmil.timetableserver.Timetable;
+import pl.sylwekczmil.timetableserver.model.Timetable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.transaction.UserTransaction;
-import pl.sylwekczmil.timetableserver.User;
+import pl.sylwekczmil.timetableserver.model.User;
 import pl.sylwekczmil.timetableserver.controller.exceptions.NonexistentEntityException;
 import pl.sylwekczmil.timetableserver.controller.exceptions.RollbackFailureException;
 
