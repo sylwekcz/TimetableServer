@@ -22,6 +22,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import pl.sylwekczmil.timetableserver.model.Secured;
 import pl.sylwekczmil.timetableserver.model.Timetable;
 
 @Path("user")
@@ -104,13 +105,15 @@ public class UserRESTFacade {
        return String.valueOf(getJpaController().getUserCount());
     }
 
+    @Secured
     @GET
     @Path("current")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response findCurrentUser(@Context SecurityContext securityContext) {
+        
+        Principal principal = securityContext.getUserPrincipal();
+        String username = principal.getName();
         try{
-            Principal principal = securityContext.getUserPrincipal();
-            String username = principal.getName();
             return Response.ok(getJpaController().findUserByUsername(username)).build();
         } catch (Exception ex) {
             return Response.noContent().build();
