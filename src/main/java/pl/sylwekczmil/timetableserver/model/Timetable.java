@@ -94,7 +94,7 @@ public class Timetable implements Serializable {
         this.week = week;
     }
 
-    @XmlTransient
+    
     public Collection<User> getUserCollection() {
         return userCollection;
     }
