@@ -22,10 +22,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import pl.sylwekczmil.timetableserver.model.Secured;
 import pl.sylwekczmil.timetableserver.model.Timetable;
 
-@Secured
 @Path("user")
 public class UserRESTFacade {
 
