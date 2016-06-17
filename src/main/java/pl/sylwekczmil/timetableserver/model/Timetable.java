@@ -20,7 +20,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 
 @Entity
@@ -94,7 +93,6 @@ public class Timetable implements Serializable {
         this.week = week;
     }
 
-    @XmlTransient
     public Collection<User> getUserCollection() {
         return userCollection;
     }
@@ -103,7 +101,6 @@ public class Timetable implements Serializable {
         this.userCollection = userCollection;
     }
 
-    @XmlTransient
     public Collection<Event> getEventCollection() {
         return eventCollection;
     }
