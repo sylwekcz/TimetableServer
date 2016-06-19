@@ -180,13 +180,7 @@ public class TimetableJpaController implements Serializable {
             List<String> illegalOrphanMessages = null;
             Collection<Event> eventCollectionOrphanCheck = timetable.getEventCollection();
             for (Event eventCollectionOrphanCheckEvent : eventCollectionOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Timetable (" + timetable + ") cannot be destroyed since the Event " + eventCollectionOrphanCheckEvent + " in its eventCollection field has a non-nullable idTimetable field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
+               em.remove(eventCollectionOrphanCheckEvent);
             }
             Collection<User> userCollection = timetable.getUserCollection();
             for (User userCollectionUser : userCollection) {
