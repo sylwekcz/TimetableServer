@@ -128,7 +128,7 @@ public class Event implements Serializable {
         this.day = day;
     }
 
-    @XmlTransient
+    
     public Timetable getIdTimetable() {
         return idTimetable;
     }
