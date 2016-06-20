@@ -32,6 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Event.findByDay", query = "SELECT e FROM Event e WHERE e.day = :day")})
 public class Event implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +65,12 @@ public class Event implements Serializable {
     @JoinColumn(name = "id_timetable", referencedColumnName = "id_timetable")
     @ManyToOne(optional = false)
     private Timetable idTimetable;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "room")
+    private String room;
 
     public Event() {
     }
@@ -160,6 +168,14 @@ public class Event implements Serializable {
     @Override
     public String toString() {
         return "pl.sylwekczmil.timetableserver.Event[ idEvent=" + idEvent + " ]";
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
     
 }

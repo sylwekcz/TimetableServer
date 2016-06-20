@@ -94,6 +94,7 @@ public class Timetable implements Serializable {
         this.week = week;
     }
 
+   
     public Collection<User> getUserCollection() {
         return userCollection;
     }
